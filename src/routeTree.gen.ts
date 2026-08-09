@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CalendarRouteImport } from './routes/calendar'
+import { Route as LotCalculatorRouteImport } from './routes/lot-calculator'
+import { Route as RiskCalculatorRouteImport } from './routes/risk-calculator'
+import { Route as TradesRouteImport } from './routes/trades'
+import { Route as WeeklyGoalsRouteImport } from './routes/weekly-goals'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LotCalculatorRoute = LotCalculatorRouteImport.update({
+  id: '/lot-calculator',
+  path: '/lot-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RiskCalculatorRoute = RiskCalculatorRouteImport.update({
+  id: '/risk-calculator',
+  path: '/risk-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TradesRoute = TradesRouteImport.update({
+  id: '/trades',
+  path: '/trades',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeeklyGoalsRoute = WeeklyGoalsRouteImport.update({
+  id: '/weekly-goals',
+  path: '/weekly-goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
+  '/lot-calculator': typeof LotCalculatorRoute
+  '/risk-calculator': typeof RiskCalculatorRoute
+  '/trades': typeof TradesRoute
+  '/weekly-goals': typeof WeeklyGoalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
+  '/lot-calculator': typeof LotCalculatorRoute
+  '/risk-calculator': typeof RiskCalculatorRoute
+  '/trades': typeof TradesRoute
+  '/weekly-goals': typeof WeeklyGoalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/analytics': typeof AnalyticsRoute
+  '/auth': typeof AuthRoute
+  '/calendar': typeof CalendarRoute
+  '/lot-calculator': typeof LotCalculatorRoute
+  '/risk-calculator': typeof RiskCalculatorRoute
+  '/trades': typeof TradesRoute
+  '/weekly-goals': typeof WeeklyGoalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/calendar'
+    | '/lot-calculator'
+    | '/risk-calculator'
+    | '/trades'
+    | '/weekly-goals'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/calendar'
+    | '/lot-calculator'
+    | '/risk-calculator'
+    | '/trades'
+    | '/weekly-goals'
+  id:
+    | '__root__'
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/calendar'
+    | '/lot-calculator'
+    | '/risk-calculator'
+    | '/trades'
+    | '/weekly-goals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  AuthRoute: typeof AuthRoute
+  CalendarRoute: typeof CalendarRoute
+  LotCalculatorRoute: typeof LotCalculatorRoute
+  RiskCalculatorRoute: typeof RiskCalculatorRoute
+  TradesRoute: typeof TradesRoute
+  WeeklyGoalsRoute: typeof WeeklyGoalsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +143,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lot-calculator': {
+      id: '/lot-calculator'
+      path: '/lot-calculator'
+      fullPath: '/lot-calculator'
+      preLoaderRoute: typeof LotCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/risk-calculator': {
+      id: '/risk-calculator'
+      path: '/risk-calculator'
+      fullPath: '/risk-calculator'
+      preLoaderRoute: typeof RiskCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trades': {
+      id: '/trades'
+      path: '/trades'
+      fullPath: '/trades'
+      preLoaderRoute: typeof TradesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weekly-goals': {
+      id: '/weekly-goals'
+      path: '/weekly-goals'
+      fullPath: '/weekly-goals'
+      preLoaderRoute: typeof WeeklyGoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  AuthRoute: AuthRoute,
+  CalendarRoute: CalendarRoute,
+  LotCalculatorRoute: LotCalculatorRoute,
+  RiskCalculatorRoute: RiskCalculatorRoute,
+  TradesRoute: TradesRoute,
+  WeeklyGoalsRoute: WeeklyGoalsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
