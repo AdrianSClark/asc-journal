@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CalendarRouteImport } from './routes/calendar'
+import { Route as LotCalculatorRouteImport } from './routes/lot-calculator'
 import { Route as RiskCalculatorRouteImport } from './routes/risk-calculator'
 import { Route as TradesRouteImport } from './routes/trades'
 
@@ -36,6 +37,11 @@ const CalendarRoute = CalendarRouteImport.update({
   path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LotCalculatorRoute = LotCalculatorRouteImport.update({
+  id: '/lot-calculator',
+  path: '/lot-calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RiskCalculatorRoute = RiskCalculatorRouteImport.update({
   id: '/risk-calculator',
   path: '/risk-calculator',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/lot-calculator': typeof LotCalculatorRoute
   '/risk-calculator': typeof RiskCalculatorRoute
   '/trades': typeof TradesRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/lot-calculator': typeof LotCalculatorRoute
   '/risk-calculator': typeof RiskCalculatorRoute
   '/trades': typeof TradesRoute
 }
@@ -69,22 +77,36 @@ export interface FileRoutesById {
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/calendar': typeof CalendarRoute
+  '/lot-calculator': typeof LotCalculatorRoute
   '/risk-calculator': typeof RiskCalculatorRoute
   '/trades': typeof TradesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/analytics' | '/auth' | '/calendar' | '/risk-calculator' | '/trades'
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/calendar'
+    | '/lot-calculator'
+    | '/risk-calculator'
+    | '/trades'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/analytics' | '/auth' | '/calendar' | '/risk-calculator' | '/trades'
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/calendar'
+    | '/lot-calculator'
+    | '/risk-calculator'
+    | '/trades'
   id:
     | '__root__'
     | '/'
     | '/analytics'
     | '/auth'
     | '/calendar'
+    | '/lot-calculator'
     | '/risk-calculator'
     | '/trades'
   fileRoutesById: FileRoutesById
@@ -94,6 +116,7 @@ export interface RootRouteChildren {
   AnalyticsRoute: typeof AnalyticsRoute
   AuthRoute: typeof AuthRoute
   CalendarRoute: typeof CalendarRoute
+  LotCalculatorRoute: typeof LotCalculatorRoute
   RiskCalculatorRoute: typeof RiskCalculatorRoute
   TradesRoute: typeof TradesRoute
 }
@@ -128,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lot-calculator': {
+      id: '/lot-calculator'
+      path: '/lot-calculator'
+      fullPath: '/lot-calculator'
+      preLoaderRoute: typeof LotCalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/risk-calculator': {
       id: '/risk-calculator'
       path: '/risk-calculator'
@@ -150,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnalyticsRoute: AnalyticsRoute,
   AuthRoute: AuthRoute,
   CalendarRoute: CalendarRoute,
+  LotCalculatorRoute: LotCalculatorRoute,
   RiskCalculatorRoute: RiskCalculatorRoute,
   TradesRoute: TradesRoute,
 }
