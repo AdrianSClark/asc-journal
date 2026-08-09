@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Panel, StatCard } from "@/components/StatCard";
 import { useDeleteGoal, useGoals, useSaveGoal, useTrades } from "@/lib/data";
-import { toISO, weekRange } from "@/lib/stats";
+import { weekRange } from "@/lib/stats";
 import { fmtMoney, fmtNum } from "@/lib/format";
 
 export const Route = createFileRoute("/weekly-goals")({
@@ -48,9 +48,7 @@ function GoalsBody() {
   const delGoal = useDeleteGoal();
   const [form, setForm] = useState({ title: "", tracking_type: "profit", target: "", deadline: "" });
 
-  const { monday, sunday } = weekRange();
-  const from = toISO(monday);
-  const to = toISO(sunday);
+  const { start: from, end: to } = weekRange();
   const week = trades.filter((t) => t.date >= from && t.date <= to);
   const wins = week.filter((t) => Number(t.pnl) > 0).length;
 
