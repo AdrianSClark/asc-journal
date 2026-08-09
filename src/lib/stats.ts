@@ -57,7 +57,7 @@ export function groupSum<T>(items: T[], key: (t: T) => string, value: (t: T) => 
 export const dayName = (dateStr: string) =>
   ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][
     new Date(`${dateStr}T00:00:00`).getDay()
-  ];
+  ] ?? "";
 
 export function weekRange(ref = new Date()) {
   const d = new Date(ref);
