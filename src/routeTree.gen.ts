@@ -16,6 +16,7 @@ import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as LotCalculatorRouteImport } from './routes/lot-calculator'
 import { Route as RiskCalculatorRouteImport } from './routes/risk-calculator'
 import { Route as TradesRouteImport } from './routes/trades'
+import { Route as WeeklyGoalsRouteImport } from './routes/weekly-goals'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const TradesRoute = TradesRouteImport.update({
   path: '/trades',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WeeklyGoalsRoute = WeeklyGoalsRouteImport.update({
+  id: '/weekly-goals',
+  path: '/weekly-goals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/lot-calculator': typeof LotCalculatorRoute
   '/risk-calculator': typeof RiskCalculatorRoute
   '/trades': typeof TradesRoute
+  '/weekly-goals': typeof WeeklyGoalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/lot-calculator': typeof LotCalculatorRoute
   '/risk-calculator': typeof RiskCalculatorRoute
   '/trades': typeof TradesRoute
+  '/weekly-goals': typeof WeeklyGoalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/lot-calculator': typeof LotCalculatorRoute
   '/risk-calculator': typeof RiskCalculatorRoute
   '/trades': typeof TradesRoute
+  '/weekly-goals': typeof WeeklyGoalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/lot-calculator'
     | '/risk-calculator'
     | '/trades'
+    | '/weekly-goals'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/lot-calculator'
     | '/risk-calculator'
     | '/trades'
+    | '/weekly-goals'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/lot-calculator'
     | '/risk-calculator'
     | '/trades'
+    | '/weekly-goals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   LotCalculatorRoute: typeof LotCalculatorRoute
   RiskCalculatorRoute: typeof RiskCalculatorRoute
   TradesRoute: typeof TradesRoute
+  WeeklyGoalsRoute: typeof WeeklyGoalsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TradesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/weekly-goals': {
+      id: '/weekly-goals'
+      path: '/weekly-goals'
+      fullPath: '/weekly-goals'
+      preLoaderRoute: typeof WeeklyGoalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   LotCalculatorRoute: LotCalculatorRoute,
   RiskCalculatorRoute: RiskCalculatorRoute,
   TradesRoute: TradesRoute,
+  WeeklyGoalsRoute: WeeklyGoalsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
