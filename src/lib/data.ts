@@ -26,7 +26,7 @@ export function useTrades() {
 export function useSaveTrade() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (t: Partial<Trade> & { id?: string }) => {
+    mutationFn: async (t: Partial<Trade> & { id?: string | undefined }) => {
       const user_id = await uid();
       if (t.id) {
         const { id, ...rest } = t;
@@ -70,7 +70,7 @@ export function useNews() {
 export function useSaveNews() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (e: Partial<NewsEvent> & { id?: string }) => {
+    mutationFn: async (e: Partial<NewsEvent> & { id?: string | undefined }) => {
       const user_id = await uid();
       if (e.id) {
         const { id, ...rest } = e;
@@ -113,7 +113,7 @@ export function useGoals() {
 export function useSaveGoal() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (g: Partial<WeeklyGoal> & { id?: string }) => {
+    mutationFn: async (g: Partial<WeeklyGoal> & { id?: string | undefined }) => {
       const user_id = await uid();
       if (g.id) {
         const { id, ...rest } = g;
