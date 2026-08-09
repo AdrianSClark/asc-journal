@@ -2,6 +2,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { emptyPlan, type NewsEvent, type PropFirmAccount, type Trade, type TradingPlan, type WeeklyGoal } from "./types";
 
+type Draft<T> = { [K in keyof T]?: T[K] | undefined } & { id?: string | undefined };
+
 async function uid() {
   const { data } = await supabase.auth.getUser();
   if (!data.user) throw new Error("Not signed in");
@@ -26,7 +28,7 @@ export function useTrades() {
 export function useSaveTrade() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (t: Partial<Trade> & { id?: string | undefined }) => {
+    mutationFn: async (t: Draft<Trade>) => {
       const user_id = await uid();
       if (t.id) {
         const { id, ...rest } = t;
@@ -70,7 +72,7 @@ export function useNews() {
 export function useSaveNews() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (e: Partial<NewsEvent> & { id?: string | undefined }) => {
+    mutationFn: async (e: Draft<NewsEvent>) => {
       const user_id = await uid();
       if (e.id) {
         const { id, ...rest } = e;
@@ -113,7 +115,7 @@ export function useGoals() {
 export function useSaveGoal() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (g: Partial<WeeklyGoal> & { id?: string | undefined }) => {
+    mutationFn: async (g: Draft<WeeklyGoal>) => {
       const user_id = await uid();
       if (g.id) {
         const { id, ...rest } = g;
@@ -156,7 +158,7 @@ export function usePropFirms() {
 export function useSavePropFirm() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (p: Partial<PropFirmAccount>) => {
+    mutationFn: async (p: Draft<PropFirmAccount>) => {
       const user_id = await uid();
       const { error } = await supabase.from("prop_firm_accounts").insert({ ...p, user_id } as never);
       if (error) throw error;
