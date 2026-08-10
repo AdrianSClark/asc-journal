@@ -40,33 +40,45 @@ export type Database = {
       }
       news_events: {
         Row: {
+          actual: string | null
           created_at: string
           currency: string | null
           date: string
+          forecast: string | null
           id: string
           impact: string
+          previous: string | null
+          source: string
           time: string | null
           title: string
           updated_at: string
           user_id: string
         }
         Insert: {
+          actual?: string | null
           created_at?: string
           currency?: string | null
           date?: string
+          forecast?: string | null
           id?: string
           impact?: string
+          previous?: string | null
+          source?: string
           time?: string | null
           title: string
           updated_at?: string
           user_id: string
         }
         Update: {
+          actual?: string | null
           created_at?: string
           currency?: string | null
           date?: string
+          forecast?: string | null
           id?: string
           impact?: string
+          previous?: string | null
+          source?: string
           time?: string | null
           title?: string
           updated_at?: string
