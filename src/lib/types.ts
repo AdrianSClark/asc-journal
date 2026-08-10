@@ -20,7 +20,12 @@ export type NewsEvent = {
   currency: string | null;
   impact: string;
   title: string;
+  actual: string | null;
+  forecast: string | null;
+  previous: string | null;
+  source: string;
 };
+
 
 export type WeeklyGoal = {
   id: string;
