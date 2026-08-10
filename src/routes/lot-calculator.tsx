@@ -374,7 +374,7 @@ function LotBody() {
         <StatCard
           label="Position size"
           value={lots ? `${fmtNum(lots, 3)} lots` : "—"}
-          sub={lots ? `${fmtNum(lots * unitsPerLot, 0)} units` : undefined}
+          {...(lots ? { sub: `${fmtNum(lots * unitsPerLot, 0)} units` } : {})}
         />
       </div>
 
