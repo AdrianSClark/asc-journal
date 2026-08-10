@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { syncEconomicCalendar } from "@/lib/calendar.functions";
+
 import { emptyPlan, type NewsEvent, type PropFirmAccount, type Trade, type TradingPlan, type WeeklyGoal } from "./types";
 
 type Draft<T> = { [K in keyof T]?: T[K] | undefined } & { id?: string | undefined };
