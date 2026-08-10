@@ -98,6 +98,15 @@ export function useDeleteNews() {
   });
 }
 
+export function useSyncNews() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async () => syncEconomicCalendar(),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ["news_events"] }),
+  });
+}
+
+
 export function useGoals() {
   return useQuery({
     queryKey: ["weekly_goals"],
