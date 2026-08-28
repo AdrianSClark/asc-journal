@@ -76,6 +76,12 @@
 }
 
 @layer base {
+  html {
+    font-size: 18px; /* default is 16px; bump to 17–18px for ~10% larger */
+  }
+}
+
+@layer base {
   * {
     border-color: var(--color-border);
   }
