@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
@@ -90,15 +90,10 @@ export type Database = {
         Row: {
           account_size: number
           created_at: string
-          daily_loss_cap_pct: number
           firm: string
           id: string
-          max_drawdown_pct: number
-          max_trades_per_day: number
           notes: string | null
           phase: string
-          profit_target_pct: number
-          risk_per_trade_pct: number
           start_date: string | null
           status: string
           updated_at: string
@@ -107,15 +102,10 @@ export type Database = {
         Insert: {
           account_size?: number
           created_at?: string
-          daily_loss_cap_pct?: number
           firm: string
           id?: string
-          max_drawdown_pct?: number
-          max_trades_per_day?: number
           notes?: string | null
           phase?: string
-          profit_target_pct?: number
-          risk_per_trade_pct?: number
           start_date?: string | null
           status?: string
           updated_at?: string
@@ -124,15 +114,10 @@ export type Database = {
         Update: {
           account_size?: number
           created_at?: string
-          daily_loss_cap_pct?: number
           firm?: string
           id?: string
-          max_drawdown_pct?: number
-          max_trades_per_day?: number
           notes?: string | null
           phase?: string
-          profit_target_pct?: number
-          risk_per_trade_pct?: number
           start_date?: string | null
           status?: string
           updated_at?: string
@@ -142,7 +127,6 @@ export type Database = {
       }
       trades: {
         Row: {
-          account_id: string | null
           created_at: string
           date: string
           direction: string
@@ -158,7 +142,6 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          account_id?: string | null
           created_at?: string
           date?: string
           direction?: string
@@ -174,7 +157,6 @@ export type Database = {
           user_id: string
         }
         Update: {
-          account_id?: string | null
           created_at?: string
           date?: string
           direction?: string
@@ -189,15 +171,7 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "trades_account_id_fkey"
-            columns: ["account_id"]
-            isOneToOne: false
-            referencedRelation: "prop_firm_accounts"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       trading_plan: {
         Row: {
