@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Pencil, Trash2 } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Panel, StatCard } from "@/components/StatCard";
-import { useDeleteTrade, useSaveTrade, useTrades } from "@/lib/data";
+import { useDeleteTrade, usePropFirms, useSaveTrade, useTrades } from "@/lib/data";
 import { computeStats } from "@/lib/stats";
 import { fmtMoney, fmtNum, fmtPct, pnlClass } from "@/lib/format";
 import { toISO } from "@/lib/stats";
@@ -14,7 +14,8 @@ export const Route = createFileRoute("/trades")({
       { title: "Trades — Ledger Trading Journal" },
       {
         name: "description",
-        content: "Log forex trades with entry, exit, size, P&L and R multiple, then edit or delete any row.",
+        content:
+          "Log forex trades with entry, exit, size, P&L and R multiple, then edit or delete any row.",
       },
       { property: "og:title", content: "Trades — Ledger Trading Journal" },
       {
@@ -44,10 +45,12 @@ const blank = {
   pnl: "",
   r_multiple: "",
   notes: "",
+  account_id: "",
 };
 
 function TradesBody() {
   const { data: trades = [] } = useTrades();
+  const { data: accounts = [] } = usePropFirms();
   const save = useSaveTrade();
   const del = useDeleteTrade();
   const [form, setForm] = useState(blank);
@@ -83,6 +86,7 @@ function TradesBody() {
               pnl: Number(form.pnl || 0),
               r_multiple: num(form.r_multiple),
               notes: form.notes || null,
+              account_id: form.account_id || null,
             });
             setForm(blank);
           }}
@@ -150,6 +154,18 @@ function TradesBody() {
             onChange={(e) => setForm({ ...form, r_multiple: e.target.value })}
             className={inputCls}
           />
+          <select
+            value={form.account_id}
+            onChange={(e) => setForm({ ...form, account_id: e.target.value })}
+            className={inputCls}
+          >
+            <option value="">No challenge account</option>
+            {accounts.map((a) => (
+              <option key={a.id} value={a.id}>
+                {a.firm} ({a.phase})
+              </option>
+            ))}
+          </select>
           <input
             placeholder="Notes"
             value={form.notes}
@@ -196,9 +212,7 @@ function TradesBody() {
                   <td className="num px-2 py-2">{t.entry_price ?? "—"}</td>
                   <td className="num px-2 py-2">{t.exit_price ?? "—"}</td>
                   <td className="num px-2 py-2">{t.size ?? "—"}</td>
-                  <td className={`num px-2 py-2 ${pnlClass(Number(t.pnl))}`}>
-                    {fmtMoney(t.pnl)}
-                  </td>
+                  <td className={`num px-2 py-2 ${pnlClass(Number(t.pnl))}`}>{fmtMoney(t.pnl)}</td>
                   <td className="num px-2 py-2">
                     {t.r_multiple === null ? "—" : `${fmtNum(t.r_multiple)}R`}
                   </td>
@@ -220,6 +234,7 @@ function TradesBody() {
                             pnl: t.pnl?.toString() ?? "",
                             r_multiple: t.r_multiple?.toString() ?? "",
                             notes: t.notes ?? "",
+                            account_id: t.account_id ?? "",
                           })
                         }
                         className="text-muted-foreground hover:text-primary"

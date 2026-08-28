@@ -11,6 +11,7 @@ export type Trade = {
   date: string;
   notes: string | null;
   created_at: string;
+  account_id: string | null;
 };
 
 export type NewsEvent = {
@@ -25,7 +26,6 @@ export type NewsEvent = {
   previous: string | null;
   source: string;
 };
-
 
 export type WeeklyGoal = {
   id: string;
@@ -45,15 +45,30 @@ export type PropFirmAccount = {
   status: string;
   start_date: string | null;
   notes: string | null;
+  profit_target_pct: number;
+  max_drawdown_pct: number;
+  daily_loss_cap_pct: number;
+  risk_per_trade_pct: number;
+  max_trades_per_day: number;
+};
+
+// ACG Alpha Pro 8% ($50K model) — used to prefill new challenge accounts.
+export const ALPHA_PRO_8_DEFAULTS = {
+  profit_target_pct: 0.08,
+  max_drawdown_pct: 0.08,
+  daily_loss_cap_pct: 0.04,
+  risk_per_trade_pct: 0.008,
+  max_trades_per_day: 4,
+};
+
+// ADR assumptions from the risk plan — edit as volatility regimes shift.
+export const PAIR_ADR: Record<string, { adrPips: number; pipValuePerLot: number }> = {
+  "EUR/USD": { adrPips: 60, pipValuePerLot: 10 },
+  "GBP/USD": { adrPips: 110, pipValuePerLot: 10 },
 };
 
 export type SmartKey =
-  | "achievable"
-  | "strategic"
-  | "measurable"
-  | "controllable"
-  | "flexible"
-  | "positive";
+  "achievable" | "strategic" | "measurable" | "controllable" | "flexible" | "positive";
 
 export type SmartRow = { yes: boolean; no: boolean; why: string };
 
@@ -73,15 +88,7 @@ export const SMART_KEYS: { key: SmartKey; label: string }[] = [
   { key: "positive", label: "Positive?" },
 ];
 
-export const DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
+export const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 export const emptyPlan = (): TradingPlan => ({
   outcome_goal: "",

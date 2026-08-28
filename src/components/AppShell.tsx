@@ -14,6 +14,7 @@ const TABS = [
   { to: "/calendar", label: "Calendar" },
   { to: "/risk-calculator", label: "Risk Calculator" },
   { to: "/lot-calculator", label: "Lot Calculator" },
+  { to: "/prop-firm-plan", label: "Challenge Plan" },
   { to: "/weekly-goals", label: "Weekly Goals" },
 ] as const;
 
